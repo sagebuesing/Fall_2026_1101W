@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      window.vseNmThreadPoolSize = 6;
+      navigator.vseVuThreadPoolSize = -1;
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="Description"
+      content="Vernier Video Analysis® is a tool for science students to analyze the motion of real-world objects in videos."
+    />
+
+    <meta name="theme-color" content="#000" />
+    <link rel="icon" type="image/png" href="app_icon/favicon.ico" />
+    <link rel="apple-touch-icon" href="app_icon/icon-maskable.png" />
+    <link rel="preload" href="DataCollection.js" as="script" />
+    <link rel="manifest" href="manifest.json" />
+    <noscript>
+      <a href="https://vernier.com/va">Vernier Video Analysis requires JavaScript to be enabled.</a>
+    </noscript>
+    <script nomodule>
+      // If the user's browser doesn't support modules it won't support the features we need. Take them to a TIL on browser support.
+      window.location = 'https://www.vernier.com/til/4490';
+    </script>
+    <style>
+      html {
+        touch-action: manipulation;
+      }
+
+      :root {
+        --base-font-size: 1em;
+        font-size: var(--base-font-size);
+      }
+
+      :root,
+      body {
+        position: fixed; /* prevent pull to refresh on mobile safari */
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        background-color: #000000;
+        overscroll-behavior: none; /* prevent pull to refresh on chrome */
+        margin: 0;
+      }
+    </style>
+    <script>
+      window.Module = {}; // becomes the WASM Module(s)
+
+      window.Module.postRun = () => {
+        window.wasmModuleReady = true;
+        document.dispatchEvent(new CustomEvent('wasm-ready'));
+      };
+    </script>
+    <script src="DataCollection.js"></script>
+    <script id="index" type="module" src="index.js"></script>
+    <title>Vernier Video Analysis®</title>
+  </head>
+  <body>
+    <va-app id="app">
+      <vst-ui-tooltip-wrapper slot="tooltip_wrapper"></vst-ui-tooltip-wrapper>
+    </va-app>
+  </body>
+</html>

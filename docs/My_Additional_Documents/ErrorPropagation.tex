@@ -364,7 +364,12 @@ As was said before, we will use many of these equations in sequence. Finally, le
   That's a pretty large uncertainty! As you can see, uncertainties can compound to become quite important, even if they seem somewhat inconsequential at first.
 
   Here are some visual representations of what it looks like to add and multiply probability distributions. In both cases, I show the two starting distributions and the outcome on the top plot, as we would expect following our equations \eqref{eq:scalar}\eqref{eq:add} \eqref{eq:mult}.
-  In the bottom half, I show (left) a close up of the resulting distribution using our error propagation formulae. On the right we have what actually happens if I take distributions $A$ and $B$, and combine all possible combinations of pairs of measurements from each of the distributions. For example, this would be mean that if I were adding a distribution $P = \left\{p_1,p_2\right\}$ with $Q=\left\{q_1,q_2\right\}$ then I would get a resulting distribution $R=P+Q=\left\{p_1+q_1,p_1+q_2,p_2+q_1,p_2+q_2\right\}$.
+  In the bottom half, I show (left) a close up of the resulting distribution using our error propagation formulae. On the right we have what actually happens if I take distributions $A$ and $B$, and combine all possible combinations of pairs of measurements from each of the distributions.
+  For example, this would be mean that if I were adding a distribution $P = \left\{p_1,p_2\right\}$ with $Q=\left\{q_1,q_2\right\}$ then I would get a resulting distribution $R=P+Q=\left\{p_1+q_1,p_1+q_2,p_2+q_1,p_2+q_2\right\}$.
+
+  \begin{equation}
+    R=P+Q=\left\{p_1+q_1,p_1+q_2,p_2+q_1,p_2+q_2\right\}\label{eq:resdist}
+  \end{equation}
 
   \begin{figure}[H]
     \centering
@@ -391,5 +396,13 @@ As was said before, we will use many of these equations in sequence. Finally, le
     \delta' (A*B) = \delta'C=\left( \bar{A}^{2} + \left(\delta A\right)^{2}\right)\left( \bar{B}^{2} + \left(\delta B\right)^{2}\right)- \bar{A}^{2} \bar{B}^{2}\label{eq:stmult}
   \end{equation}
 
+  These equations properly represent the new error of the resulting distributions.
 
-  \end{document}
+  One can also find the error in a derived quantity by brute force- that is by taking all possible combinations of the input samples to get raw output distribution (for example all possible additions or multiplications between the two distributions, like in \eqref{eq:resdist}.
+    From that new distribution we could then calculate the new deviation. This is another method that you can do, but needless to say it is the most arduous of the techniques we have, particularly as the number of samples grows.
+    Considering if we had measurement distributions $P$ and $Q$, with cardinality (containing a total number of samples equal to)  $\mathcal{P}$ and $\mathcal{Q}$ samples respectively.
+    Then the size of the resulting distribution $R$ is the number of ways to pick one sample out of $P$ and one out $Q$. Then the size $\mathcal{R}$ will be $\mathcal{P}*\mathcal{Q}$. You can see that as you take more and more measurements, this quickly becomes unmanageable.
+
+
+
+    \end{document}

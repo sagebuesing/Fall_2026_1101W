@@ -82,28 +82,76 @@ This is where you have to worry about propagating error, because when we \emph{u
   A \textbf{Derived Quantity} is a value of a property of a system that is not being directly measured. A \textbf{Derived Quantity} is found from quantities that we \emph{did} measure directly.
 \end{definition}
 
-Let's quickly go over the anatomy of a measurement. Measurements are composed of a \textbf{Central Value} and a \textbf{Variance}.
+Let's quickly go over the anatomy of a measurement. Measurements are composed of a \textbf{mean} or \textbf{Central Value} and a \textbf{Deviation}.
 
-\begin{definition}[Central Value \emph{or} Mean]
-  The \textbf{Central Value}(or the \textbf{Mean}) of a measurement is the main number we usually think of as a measurement's output- basically it's what the instrument reads. If I were to measure a mass to be $71$g, that is the central value.
+\begin{equation}
+  \mathrm{Measurement} : \bar{m}+\delta m\label{eq:measurement}
+\end{equation}
+
+
+\begin{definition}[Mean \emph{or} Central Value]
+  The \textbf{Mean} (or the \textbf{Central Value}) of a measurement is the main number we usually think of as a measurement's output- basically it's what the instrument reads.
+  If I were to measure a mass to be $71$g, that is the mean value, which basically is the average of the distribution.
+  The mean is usually denoted with a bar, ie. $\bar{m}$.
+  From a sampling of $N$ datapoints, we can find the mean of the measurement distribution to be
+  \begin{equation}
+    \bar{m}=\sum\limits_{n=1}^{N} \frac{m_n}{N}=\frac{m_1}{N}+\frac{m_2}{N}+\ldots+ \frac{m_N}{N}= \frac{m_1+m_2+\ldots+m_N}{N}
+    \label{eq:mean}
+  \end{equation}
+  where $m_n$ is the $n$th measurement made.
+
 \end{definition}
 
-It is worth noting (by the conceit of measurement uncertainty) that when we measure a central value, that is not a completely accurate representation of that quantity as a whole. Due to random noise, all sorts of general errors that might occur in the measurement process, instrument calibration process, etc., we can assume that our measurements are reasonably close to the \emph{actual} value. Mathematically, we can think of this spread as a \emph{\href{https://en.wikipedia.org/wiki/Normal\_distribution}{normal distribution}}. All you need to consider for this class is the idea that the \textbf{Central Value} is the most likely value for the ``actual" value to be, but with decreasing likelyhood as we drift further from that center, there is a range that the ``actual" value can fall within.
+It is worth noting (by the conceit of measurement uncertainty) that when we measure a central value, that is not a completely accurate representation of that quantity as a whole. Due to random noise, all sorts of general errors that might occur in the measurement process, instrument calibration process, etc., we can assume that our measurements are reasonably close to the \emph{actual} value. Mathematically, we can think of this spread as a \textbf{\href{https://en.wikipedia.org/wiki/Normal\_distribution}{Normal Distribution}}.
+At the end of the day the takeaway is the idea that the \textbf{Mean} is the most likely value for the ``actual" value to be, but with decreasing likelyhood as we drift further from that center, there is a range that the ``actual" value can fall within.
 
 \begin{figure}
   \centering
   \includegraphics[width=0.7\linewidth]{assets/Uniform.png}
   \caption{
     \textbf{Measurement Distributions}
-    The measured central value $m$ with respect to two types of measurement distribution. We see that the variance $\delta m$ is (half) the width of our uniform distribution, and is equal to (half) the width between the points where the probability is $\frac{1}{e}$ times the maximum probability for the normal distribution.
+    The measured mean $\bar{m}$ with respect to two types of measurement distribution. We see that the deviation $\delta m$ is (half) the width of our uniform distribution, and is equal to (half) the width between the points where the probability is $\frac{1}{\sqrt{e}}$ times the maximum probability for the normal distribution.
+    \label{fig:dist}
   }
-  \label{fig:dist}
 \end{figure}
 
 
-\begin{definition}[Variance]
-  For our purposes, instead of a normal distribution, we are treating our measurements more like a box where our variance is half of the width of the box. This represents the range of possible values around our central value that we are considering as possible ``actual" values for a measurement.
+\begin{definition}[Deviation]
+  The \textbf{deviation} of a distribution is the range of values that are ``reasonably likely" to measure around the \textbf{Mean}.
 \end{definition}
+
+There are a few ways to define what we call ``likely"- for the uniform distribution, we can clearly see the width of the range of all possible values that can be measured, so it is natural to call this the deviation for a uniform distribution.
+In our measurements however, you will likely find that what you end up with is something a bit more focused around the mean value. There is a mathematical theorem known as the \textbf{\href{https://www.geeksforgeeks.org/maths/central-limit-theorem/}{Central Limit Theorem}}, that states that random measurements of a certain class (including most of the types of measurements taken in a basic lab) can be represented with a \textbf{Normal Distribution}.
+A \textbf{Normal Distribution} (also known as a \emph{Gaussian Distribution} or \emph{Bell Curve}) is a distribution where the mean value is the most likely to be measured. Values away from the mean become less likely like the function $e^{-x^2}$.
+
+The most commonly used measure is the \textbf{standard deviation}.
+
+\begin{definition}[Average deviation and Standard Deviation]
+  Consider a distribution $\mathcal{M}$ of $N$ measurements $\left\{m_1,m_2,\ldots,m_N\right\}$. We define the \textbf{Average Deviation} to be
+  \begin{equation}
+    \mathrm{avgdev}\left(\mathcal{M}\right)=\sum\limits_{n=1}^{N} \frac{\left|m_n-\bar{m}\right|}{N}\label{avgdev}
+  \end{equation}
+  Where $\left| \, \cdot \, \right|$ is the {\color{blue} \emph{absolute value}}. The average deviation makes a lot of intuitive sense as a measure of how uncertain our measurement is.
+  We sum up all of (the absolute values of) the \emph{differences} of each measurement with our \textbf{mean}, then divide by the number of measurements we took to get the average difference of our measurements from the mean.
+
+  The \textbf{standard deviation} is very similar to the average deviation, where the only difference is that we square the numerator of each term.
+  \begin{equation}
+    \sigma\left(\mathcal{M}\right)=\sum\limits_{n=1}^{N} \frac{\left(m_n- \bar{m}\right)^{2}}{N}\label{eq:stdev}
+  \end{equation}
+  Materially, you can use pretty much the same intuition that we discussed for the average deviation to understand why the standard deviation is a reasonable measurement of uncertainty, since all that squaring the numerator does is cause larger differences from the mean to be counted a bit more, and smalled differences a bit less. The general behavior is the same.
+  The main reasons to use the standard deviation are
+  \begin{enumerate}
+    \item The standard deviation has a mathematically rigorous definition when propagating error, which is tied to the definition of the Normal Distribution.
+
+      Specifically, the standard deviation is the ``distance" from your value where you are only $1/\sqrt{e}\approx 61\%$ as likely to make that measurement as you would be the mean.
+    \item Pretty much all research uses it as the go-to measure of deviation
+  \end{enumerate}
+
+\end{definition}
+
+The standard deviation and the average deviation are related by a factor of $\sqrt{\frac{2}{\pi}}\approx 0.8$, meaning that the average deviation is always going to be a \emph{narrower} uncertainty margin.
+
+
 
 The goal of error propagation is thus to find the error in a Derived Quantity from the error in the measurements we're using to \emph{find} that quantity. To do so, we have to use some combination of 3 fundamental equations.
 
@@ -112,7 +160,7 @@ The goal of error propagation is thus to find the error in a Derived Quantity fr
   \begin{align}
     \delta \left(c*A\right) &= c*\delta A \label{eq:scalar}\\
     \delta\left(A+B\right) &= \delta A + \delta B \label{eq:add}\\
-    \delta\left(A * B\right) &= \left(A*B\right)\left(\frac{\delta A}{A} + \frac{\delta B}{B}\right)\label{eq:mult}
+    \delta\left(A * B\right) &= \left(\bar{A}*\bar{B}\right)\left(\frac{\delta A}{\bar{A}} + \frac{\delta B}{\bar{B}}\right)\label{eq:mult}
   \end{align}
 \end{lemma}
 
@@ -314,5 +362,34 @@ As was said before, we will use many of these equations in sequence. Finally, le
   \end{example}
 
   That's a pretty large uncertainty! As you can see, uncertainties can compound to become quite important, even if they seem somewhat inconsequential at first.
+
+  Here are some visual representations of what it looks like to add and multiply probability distributions. In both cases, I show the two starting distributions and the outcome on the top plot, as we would expect following our equations \eqref{eq:scalar}\eqref{eq:add} \eqref{eq:mult}.
+  In the bottom half, I show (left) a close up of the resulting distribution using our error propagation formulae. On the right we have what actually happens if I take distributions $A$ and $B$, and combine all possible combinations of pairs of measurements from each of the distributions. For example, this would be mean that if I were adding a distribution $P = \left\{p_1,p_2\right\}$ with $Q=\left\{q_1,q_2\right\}$ then I would get a resulting distribution $R=P+Q=\left\{p_1+q_1,p_1+q_2,p_2+q_1,p_2+q_2\right\}$.
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{assets/Sum.png}
+  \end{figure}
+
+  The rigorous equation for propagating error when adding is
+
+  \begin{equation}
+    \delta' (A+B) = \delta' C = \sqrt{\delta A^2 + \delta B^2}\label{eq:stadd}
+  \end{equation}
+
+  Where $\delta A$ etc. are really the standard deviations $\sigma_A$ etc. here. $\delta$ stands for a typical deviation of some kind, but since these are normal distributions, I am using the standard deviation. I am also just calling it $\delta'$ to distinguish from the $\delta$ used earlier as found using our simpler propagation equations.
+
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{assets/Product.png}
+  \end{figure}
+
+  For multiplying
+
+  \begin{equation}
+    \delta' (A*B) = \delta'C=\left( \bar{A}^{2} + \left(\delta A\right)^{2}\right)\left( \bar{B}^{2} + \left(\delta B\right)^{2}\right)- \bar{A}^{2} \bar{B}^{2}\label{eq:stmult}
+  \end{equation}
+
 
   \end{document}
